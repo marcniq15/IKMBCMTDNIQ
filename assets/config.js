@@ -14,9 +14,9 @@ window._config = {
   // These settings are required to connect your app to your AWS User Pool.
   // Replace the placeholder values with your actual AWS Cognito details.
   cognito: {
-    userPoolId: 'REPLACE_WITH_YOUR_COGNITO_USER_POOL_ID', // e.g., 'us-east-1_xxxxxxxxx'
-    userPoolClientId: 'REPLACE_WITH_YOUR_COGNITO_APP_CLIENT_ID', // e.g., 'xxxxxxxxxxxxxxxxxxxxxx'
-    region: 'REPLACE_WITH_YOUR_AWS_REGION', // e.g., 'us-east-1'
+    userPoolId: 'us-east-1_DKGPQeiej', // e.g., 'us-east-1_xxxxxxxxx'
+    userPoolClientId: '26gs8tfvu3c1v8711d4mqkgkas', // e.g., 'xxxxxxxxxxxxxxxxxxxxxx'
+    region: 'us-east-1', // e.g., 'us-east-1'
   },
 
   // --- AWS API Gateway for Backend API ---
