@@ -11,16 +11,16 @@ const String amplifyconfig = '''{
                 "CredentialsProvider": {
                     "CognitoIdentity": {
                         "Default": {
-                            "PoolId": "YOUR_IDENTITY_POOL_ID", // OPTIONAL: Only if you have an Identity Pool
-                            "Region": "YOUR_AWS_REGION"
+                            "PoolId": "us-east-1_DKGPQeiej", // OPTIONAL: Only if you have an Identity Pool
+                            "Region": "us-east-1"
                         }
                     }
                 },
                 "CognitoUserPool": {
                     "Default": {
-                        "PoolId": "YOUR_COGNITO_USER_POOL_ID",
-                        "AppClientId": "YOUR_COGNITO_APP_CLIENT_ID",
-                        "Region": "YOUR_AWS_REGION"
+                        "PoolId": "us-east-1_DKGPQeiej",
+                        "AppClientId": "26gs8tfvu3c1v8711d4mqkgkas",
+                        "Region": "us-east-1"
                     }
                 },
                 "Auth": {
