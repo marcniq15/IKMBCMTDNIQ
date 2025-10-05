@@ -23,6 +23,6 @@ window._config = {
   // This is the URL your app will use to make API calls to your backend services.
   // Replace the placeholder with the invoke URL of your API Gateway.
   api: {
-    invokeUrl: 'REPLACE_WITH_YOUR_API_GATEWAY_INVOKE_URL', // e.g., 'https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/prod'
+    invokeUrl: 'https://nmtquj47od.execute-api.us-east-1.amazonaws.com/dev', // e.g., 'https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/prod'
   },
 };
