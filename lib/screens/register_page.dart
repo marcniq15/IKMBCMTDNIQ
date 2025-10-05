@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// ** 1. ADDED Amplify import for Cognito functionality **
+import 'package:amplify_flutter/amplify_flutter.dart'; 
 import 'package:real_commutrade/theme/app_theme.dart'; // Import the AppTheme
 
 class RegisterPage extends StatefulWidget {
@@ -15,18 +17,80 @@ class _RegisterPageState extends State<RegisterPage> {
   String? _errorMessage;
   bool _isLoading = false;
 
-  void _register() {
-    // Placeholder registration logic
+  // Changed to an asynchronous function
+  Future<void> _register() async {
+    // Basic validation
+    if (_fullNameController.text.isEmpty || 
+        _matrixNumberController.text.isEmpty || 
+        _passwordController.text.isEmpty) {
+      setState(() {
+        _errorMessage = "All fields are required.";
+      });
+      return;
+    }
+    
+    // Matrix Number is used as the unique username/identifier
+    final username = _matrixNumberController.text.trim();
+    final password = _passwordController.text.trim();
+    final fullName = _fullNameController.text.trim();
+
     setState(() {
       _isLoading = true;
       _errorMessage = null;
     });
 
-    Future.delayed(const Duration(seconds: 2), () {
+    try {
+      // 2. AWS COGNITO REGISTRATION LOGIC
+      final result = await Amplify.Auth.signUp(
+        username: username,
+        password: password,
+        options: CognitoSignUpOptions(
+          userAttributes: {
+            // NOTE: Cognito requires an email or phone for sign up by default.
+            // If you are using Matrix Number as the username and have NOT enabled
+            // email/phone verification, you can skip the email line.
+            // If email is required, you must use a real or placeholder email:
+            AuthUserAttributeKey.email: '$username@university.edu', 
+            
+            // Custom attributes must exactly match the names in your Cognito User Pool
+            AuthUserAttributeKey.custom('custom:full_name'): fullName,
+            AuthUserAttributeKey.custom('custom:matrix_number'): username,
+          },
+        ),
+      );
+
+      safePrint('Sign up result: ${result.nextStep.signUpStep}');
+      
+      // Handle the result: Cognito usually requires confirmation (step: confirmSignUp)
+      if (result.nextStep.signUpStep == AuthSignUpStep.confirmSignUp) {
+        if (mounted) {
+          // You should now navigate the user to a ConfirmationPage
+          // Navigator.of(context).push(MaterialPageRoute(builder: (_) => ConfirmationPage(username: username)));
+          
+          setState(() {
+             _errorMessage = "Success! A confirmation code has been sent. Please confirm your account.";
+          });
+        }
+      } else {
+        setState(() {
+            _errorMessage = "Registration completed successfully. You may now log in.";
+        });
+      }
+
+    } on AuthException catch (e) {
+      safePrint('Error signing up: ${e.message}');
       setState(() {
-        _isLoading = false;
-        _errorMessage = "Registration is not yet implemented.";
+          _errorMessage = e.message;
       });
+    } catch (e) {
+      safePrint('An unknown error occurred: $e');
+      setState(() {
+          _errorMessage = "An unexpected error occurred.";
+      });
+    }
+
+    setState(() {
+      _isLoading = false;
     });
   }
 
@@ -69,7 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
           gradient: LinearGradient(
             colors: [
               AppTheme.accentColor, // Darker orange from theme
-              Color(0xFFFEC48C),   // Lighter soft orange
+              Color(0xFFFEC48C),    // Lighter soft orange
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
