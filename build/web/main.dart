@@ -29,7 +29,7 @@
                         "CredentialsProvider": {
                             "CognitoIdentity": {
                                 "Default": {
-                                    "PoolId": "us-east-1_DKGPQeiej", // Optional, if using federated identities
+                                    "PoolId": "YOUR_COGNITO_IDENTITY_POOL_ID", // Optional, if using federated identities
                                     "Region": "us-east-1"
                                 }
                             }
