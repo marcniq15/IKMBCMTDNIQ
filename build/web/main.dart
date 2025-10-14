@@ -29,16 +29,16 @@
                         "CredentialsProvider": {
                             "CognitoIdentity": {
                                 "Default": {
-                                    "PoolId": "YOUR_COGNITO_IDENTITY_POOL_ID", // Optional, if using federated identities
-                                    "Region": "YOUR_AWS_REGION"
+                                    "PoolId": "us-east-1_DKGPQeiej", // Optional, if using federated identities
+                                    "Region": "us-east-1"
                                 }
                             }
                         },
                         "CognitoUserPool": {
                             "Default": {
-                                "PoolId": "YOUR_COGNITO_USER_POOL_ID", // e.g., us-east-1_XXXXX
-                                "AppClientId": "YOUR_COGNITO_APP_CLIENT_ID", // e.g., XXXXXXXX
-                                "Region": "YOUR_AWS_REGION" // e.g., us-east-1
+                                "PoolId": "us-east-1_DKGPQeiej", // e.g., us-east-1_XXXXX
+                                "AppClientId": "26gs8tfvu3c1v8711d4mqkgkas", // e.g., XXXXXXXX
+                                "Region": "us-east-1" // e.g., us-east-1
                             }
                         },
                         "Auth": {
