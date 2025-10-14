@@ -43,6 +43,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+dependencies:
+  # ... other dependencies
+  http: ^0.13.0 # Or latest version
   # ADDED: The flutter_launcher_icons package
   flutter_launcher_icons: ^0.13.1
 
